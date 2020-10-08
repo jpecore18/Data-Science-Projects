@@ -1,99 +1,56 @@
-# Projects
-- Project 1: SAT & ACT Analysis
-- Project 2: Predicting House Sale Prices with Machine Learning
 
-# Project 1: SAT & ACT Analysis
+# (Capstone) Project 6: Determinining Popularity of Rising Pop Music Artists with Scraped Spotify Data and NLP Sentiment Analysis
 
 ## Problem Statement
-Geographically, the United States remains divided by more than just geology. For each state, the participation rate of their high school students in the SAT vs ACT varies wildly. Yet, clear trends and correlations emerge. Why do some states remain loyal to only one test? Moreover, which specific factors influence the popularity of tests? Additionally, how do political and economic factors influence the layout of the test landscape? Finally, what can we suggest to raise participation rates.
+Spotify uses its popularity parameter in order to rank songs, albums, and artists. This "popularity" metric is based on how often users stream songs from Spotify. But how does this popularity metric by song-streaming compare with other metrics for popularity? 
+
+What about popularity based on aspects of the music itself: like danceability, energy, and acousticness? What about popularity based on the content of an artist's lyrics--the verbal connotations and vibe of the poetry? And what about popularity based on Twitter users' reviews of the same music/artist? How do each of these factors influence our ability to predict the popularity of an artist or song? 
+
+Finally, when using Regression modeling, Classification modeling, and Natural Language Processing Classification to predict the popularity of a musical artist, how can we use both these Spotify and non-Spotify popularity metrics to recommend which rising pop artists to fund, advertise, and support?
 
 ## Executive Summary
-The ACT dominates the SAT rate all three years in terms of participation. This results from State-Required Testing, Self-Selection, Economic Inequality, and Political Bias. To increase participation, we recommend that the SAT Board streamline the Fee Waiver Application Process, get rid of SAT Subject Tests, increase State-Required SAT Tests, add Science as its own Subject, and politically insist on the importance of SAT testing.
+Spotify Song Attributes
+1. First (for Song Attributes), I scrape three different playlists off of Spotify full of "Pop Rising" songs and stars. I clean the data, removing NAN values and duplicates for the songs. Spotify has a built in popularity function based on number of streams, so I will compare those popularity of songs to those I will generate via regression model.
+2. Second, I use a wide variety of Regression models to predict popularity of a song based on the song's metrics (like energy, danceability, acousticness, etc.) that spotify's audio analysis algorithm produces. Next, I use a wide variety of Classification models to predict whether a song is popular (metric above 70 popularity according to Spotify) or not (based on quality). 
+3. Finally, I interpret the differences between the stream-based popularity metric and this song-attribute-based popularity metric, generating reasons for incongruities.
 
-## Project 1 Contents:
-2017 Data Import & Cleaning
-2018 Data Import and Cleaning
-Exploratory Data Analysis
-Data Visualization
-Descriptive and Inferential Statistics
-Outside Research
-Conclusions and Recommendations
+Genius Lyric Attributes
+3. First (for Lyric Attributes), I use the shorter list of playlist songs (just ordered_playlist) from Spotify as a basis for which lyrics to scrape. I scrape the lyrics for each of these songs off of Genius' lyric library.
+4. Second, I use sentiment analysis and NLP to perform EDA on the most common words/sentiments for each song.
+5. Finally, I try to evaluate whether there is a correlation between most common words and song sentiment with its popularity. 
 
-Data Source
-- General Assembly Data Science Immersive 2020
-
-Outside Research Sources
-- https://www.brookings.edu/research/race-gaps-in-sat-scores-highlight-inequality-and-hinder-upward-mobility/ impact of race, wealth, required testing on SAT/ACT
-- https://www.vox.com/the-goods/2019/3/28/18282453/sat-act-college-admission-testing-cost-price impact of wealth on SAT/ACT
-- https://www.cnbc.com/2019/10/03/rich-students-get-better-sat-scores-heres-why.html impact of wealth on SAT/ACT
-- https://www.forbes.com/sites/prestoncooper2/2020/02/07/should-colleges-abandon-sat-score-requirements/#277e3736edd3 Abandoning score requirements on SAT/ACT
-- https://www.insidehighered.com/admissions/article/2018/06/25/younger-people-and-democrats-more-likely-back-test-optional-admissions Abandoning college score requirement with politics on SAT/ACT
-- https://www.census.gov/library/visualizations/2016/comm/cb16-158_median_hh_income_map.html #US MEDIAN INCOME BY STATE
-- https://www.270towin.com/maps/2016-actual-electoral-map Democrat vs Republican 2016 Race
-- https://www.statista.com/statistics/233301/median-household-income-in-the-united-states-by-education/ Income from college
-- https://www.testive.com/state-sat-act/#:~:text=Each%20U.S.%20state%20has%20a,student%20achievement%20using%20standardized%20tests.&text=In%20addition%2C%20free%20 State-required SAT/ACT testing list of states
-
-# Project 2: Predicting House Sale Prices with Machine Learning
-
-## Problem Statement
-The AMES Housing Data Set represents the amenities of over 2900 properties in Ames, Iowa priced and sold from 2006 to 2010. Over 75 distinct variables divide these amenities into categories. 
-
-The four categories of amenities for each house are categorical, ordinal, discrete, and continuous. Categorical (or nominative) values, such as neighborhood or type of roofing, lack a hierarchy of quality and possess qualitative information. Ordinal values possess a clear hierarchy (like Kitchen Quality (Excellent, Good, Average, Poor)) but still represent qualitative information. Discrete variables are countable (like Number of Cars) and quantitative. Finally, continuous variables are quantitative, measurable, and can contain fractions of values (like Square Footage). 
-
-How can this information be used by Real Estate developers and clients to predict or increase a property's value? Moreover, how can a data scientist use a model to process all of this data?
-
-## Executive Summary
-By using the form of Machine Learning called Linear Regression, this project processes through a database of AMES Housing training data. Then, linear regression predicts a house's sale price and value using the training data's trends and properties. Additionally, regression techniques (such as feature engineering and selection) enhance the quality of our predictions.
+Lyric Clustering Processing (Stretch Goal)
+6. First (for Lyrics), I use Word2Vec/Spacey to cluster the lyrics on certain words. 
+7. Finally, I try to evaluate whether there is a correlation between most common words and artist sentiment with their tweet popularity (positive tweets).
 
 ## Conclusions
+Since the average test value for Regression analysis by Song Attributes was only 30% accurate (even though we had around 233,000 songs for the dataset with a wide variety of different features), we can determine that it is very difficult to determine the quality of a song by purely audio statistics. However, since the average test value for Classification modeling by Song Attributes (<75 popularity as 0 and >=75 popularity as 1 in a binary matrix) was above 90% consistently, we can conclude that we can predict whether a song is popular or not using Classification modeling with Song Attributes. Additional sentiment analysis of the Lyrics of a subset of these songs (lyrics from around 630 songs) shows that lyrics can act as a highly correlated factor to the popularity of the song. 
 
-One can use linear regression to greatly reduce errors and improve the performance of predicting sale price based on a variety of highly correlated factors. Although, it seems that knowing which factors influence a house's price (such as Kitchen Quality and Bathroom Space) can often be more valuable than the predictive model itself. As a result, even the basic method of Linear Regression can be incredibly useful for a firm's Real Estate pricing decisions.
+## Project 6 Contents:
 
-The interpretability of linear regression (as opposed to more complex models) makes it one of the more easy models to make inferences with. We have the ability to note which features correlate with Sale Price to be able to improve the price. Additionally, we also have the relative correlations of Sale Price with other factors, giving us an actual quantitative idea of how to advise a Real Estate branch on how to recreate their properties.
+1. Webscraping Spotify and Genius
+2. Exploratory Data Analysis: Song Attributes
+3. Exploratory Data Analysis: Lyrics and Sentiment Analysis
+4. Regression Modeling: Song Attributes
+5. Classification Modeling: Song Attributes
+6. Clustering Song Lyrics
 
-## Project 2 Contents:
-
-### Informative
-- Problem Statement
-- Executive Summary
-
-### train_df
-- Data Cleaning: Categorical (Nominal) Columns with Null Values - train_df
-- Data Cleaning: Continuous Columns with Null Values - train_df
-- Data Cleaning: Discrete Columns with Null Values - train_df
-- Data Cleaning: Categorical Columns without Null Values (Making Dummies) - train_df
-- Data Cleaning: Ordinal Column Mapping
-- Data Cleaning: Correlation Heatmap
-- Data Cleaning: Continuous Columns with Null Values - train_df
-- Exploratory Data Analysis (Identifying/Possibly Dropping Outliers) - train_df
-- Feature Engineering - train_df¶
-- Model Definition - train_df
-- Model and Fit - train_df
-
-### test_df
-- Data Cleaning: Categorical (Nominal) Columns with Null Values - test_df
-- Data Cleaning: Continuous Columns with Null Values - test_df
-- Data Cleaning: Discrete Columns with Null Values - test_df
-- Data Cleaning: Categorical Columns without Null Values (Making Dummies) - test_df
-- Data Cleaning: Ordinal Column Mapping
-- Data Cleaning: Continuous Columns with Null Values - test_df
-- Exploratory Data Analysis (Identifying/Possibly Dropping Outliers) - test_df
-- Feature Engineering - test_df¶
-- Model Definition - test_df
-- Model and Fit - test_df
-
-### Exporting Dataframes
-- Exporting test_df Dataframes
-- Ridge
-- LASSO
-
-Conclusions
-- Descriptive and Inferential Statistics
-- Outside Research
-- Conclusions and Recommendations
-
-Data Source
+## Works Sourced
 - General Assembly Data Science Immersive 2020
-- Kaggle
-- https://www.kaggle.com/c/dsir-720-project-2-regression-challenge/overview
-- http://jse.amstat.org/v19n3/decock/DataDocumentation.txt
+- https://www.kaggle.com/zaheenhamidani/ultimate-spotify-tracks-db
+- https://developer.spotify.com/dashboard/applications/d7eee18620f34508b15f78ee4b9cfec4
+- https://spotipy.readthedocs.io/en/2.14.0/#features
+- https://www.marketwatch.com/story/how-spotify-influences-what-songs-become-popular-or-not-2018-06-18
+- https://towardsdatascience.com/analysis-of-top-50-spotify-songs-using-python-5a278dee980c
+- https://medium.com/@RareLoot/extracting-spotify-data-on-your-favourite-artist-via-python-d58bc92a4330
+- https://developer.spotify.com/documentation/web-api/reference/playlists/get-playlists-tracks/
+- https://developer.spotify.com/documentation/web-api/quick-start/
+- https://nycdatascience.com/blog/student-works/web-scraping/spotify-x-billboard/
+- https://ashleygingeleski.com/2019/11/11/spotify-web-api-how-to-pull-and-clean-top-song-data-using-python/
+- https://towardsdatascience.com/country-wise-visual-analysis-of-music-taste-using-spotify-api-seaborn-in-python-77f5b749b421
+- http://docs.tweepy.org/en/latest/
+- https://slideslive.com/38931524/hitpredict-using-spotify-data-to-predict-billboard-hits?ref=account-60259-latest
+- http://millionsongdataset.com/
+- https://slideslive.com/38931325/hit-song-prediction-data-biases-and-evaluation-desing?ref=account-60259-latest
+- https://towardsdatascience.com/how-to-build-a-fast-most-similar-words-method-in-spacy-32ed104fe498
+- https://spacy.io/

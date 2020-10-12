@@ -1,7 +1,7 @@
 # Coding Projects Overview (Most Current by Reverse Chronological Order)
 - Project 6 (Capstone): Deteminining Popularity of Rising Pop Music Artists with Scraped Spotify Data and NLP Sentiment Analysis
 - Project 5: Estimating Flood Depths of Submerged Vehicles with Convolutional Neural Networks (cNN)
-- Project 4: Hackathon
+- Project 4: Predicting Income Bracket of Citizens with their Demographic Backgrounds
 - Project 3: Predicting Dating App Subreddit with Natural Language Processing
 - Project 2: Predicting House Sale Prices with Machine Learning
 - Project 1: SAT & ACT Analysis
@@ -9,26 +9,45 @@
 # Project 6 (Capstone): Deteminining Popularity of Rising Pop Music Artists with Scraped Spotify Data and NLP Sentiment Analysis
 
 ## Problem Statement
-Spotify uses its popularity parameter in order to rank songs, albums, and artists. This "popularity" metric is based on how often users stream songs from Spotify. But how does this popularity metric by song-streaming compare with other metrics for popularity? 
+1. Spotify uses its popularity parameter in order to rank songs, albums, and artists. This "popularity" metric is based on how often users stream songs from Spotify. 
 
-What about popularity based on aspects of the music itself: like danceability, energy, and acousticness? What about popularity based on the content of an artist's lyrics--the verbal connotations and vibe of the poetry? And what about popularity based on Twitter users' reviews of the same music/artist? How do each of these factors influence our ability to predict the popularity of an artist or song? 
+2. But how does this stream-popularity metric compare with other metrics for popularity? 
+    - This metric only shows how popular very recent artists are in general (not popularity according to genre or popularity by song/lyrical content). 
 
-Finally, when using Regression modeling, Classification modeling, and Natural Language Processing Classification to predict the popularity of a musical artist, how can we use both these Spotify and non-Spotify popularity metrics to recommend which rising pop artists to fund, advertise, and support?
+3. As a result, historically VERY popular classic songs (by Earth, Wind, & Fire, The Beatles, and other "classic groups") are overlooked. Additionally, artists who are VERY popular in their genre become ignored due to higher weight artists from higher popularity genres like "pop." 
+
+4. We need a new metric for popularity. In fact, we need more than one new popularity metric and a logic to guide our new metrics for popularity, in addition to a way of evaluating our old metric's effectiveness.
+
+So:
+
+1. Can we predict a song's popularity by stream count accurately using Regression Modeling?
+
+2. Can we predict whether a song is popular by stream count using Classification Modeling?
+
+3. What can we say about a song's popularity based on aspects of the music itself: like danceability, energy, and acousticness? 
+
+4. What can we say about a song’s popularity based on the content of an artist's lyrics--the verbal connotations and vibe of the poetry? 
+
+5. How do each of these factors influence our ability to predict the popularity of an artist or song?
+
+6. Finally, when using Regression modeling, Classification modeling, and NLP Clustering to predict the popularity of a musical artist, how can evaluate whether or not to trust Spotify's ranking of popularity? 
+
+7. What other metrics of popularity should we define and recommend that Spotify and other top streaming sites adopt? What is our reasoning?
 
 ## Executive Summary
 Spotify Song Attributes
-1. First (for Song Attributes), I scrape three different playlists off of Spotify full of "Pop Rising" songs and stars. I clean the data, removing NAN values and duplicates for the songs. Spotify has a built in popularity function based on number of streams, so I will compare those popularity of songs to those I will generate via regression model.
-2. Second, I use a wide variety of Regression models to predict popularity of a song based on the song's metrics (like energy, danceability, acousticness, etc.) that spotify's audio analysis algorithm produces. Next, I use a wide variety of Classification models to predict whether a song is popular (metric above 70 popularity according to Spotify) or not (based on quality). 
-3. Finally, I interpret the differences between the stream-based popularity metric and this song-attribute-based popularity metric, generating reasons for incongruities.
+1. First (for Song Attributes), I scrape ten different playlists off of Spotify full of 700 "Rising" songs from 2020. I clean the data, removing NAN values and duplicates for the songs. Spotify has a built in popularity function based on number of streams. This is ordered_playlist. Then, I import a dataframe of 232,000 songs from 2018-2020 made by a prominent Kaggle musical data scientist, Zaheen Hamidani, to the small dataset. I clean this data, dropping NAN values and duplicates. Next, I concatenate this songlist to ordered_songlist. At last, I name this large dataframe of roughly 150,000 songs as giant_ordered_playlist.
+2. Second, I build a wide variety of Regression Models that try to accurately predict a song's "stream-popularity" based off of the song's musical attributes (like energy, valence, modality, time signature, and other characteristics). I will also use many different Classification Models to measure whether we can predict that a song is popular (above 75% popularity on a scale of 0 to 100) based off of these same song attributes. 
+3. Finally, I interpret the differences between the stream-based popularity metric and this song-attribute-based popularity metric, generating reasons for incongruities and making conclusions about the effectiveness of our popularity metric.
 
 Genius Lyric Attributes
-3. First (for Lyric Attributes), I use the shorter list of playlist songs (just ordered_playlist) from Spotify as a basis for which lyrics to scrape. I scrape the lyrics for each of these songs off of Genius' lyric library.
-4. Second, I use sentiment analysis and NLP to perform EDA on the most common words/sentiments for each song.
+3. First (for Lyric Attributes), I use the shorter list of playlist songs (just 700 songs from ordered_playlist) from Spotify as a basis for which lyrics to scrape. I scrape the lyrics for each of these songs off of Genius' lyric library.
+4. Second, I use sentiment analysis and NLP (CountVectorizer) to perform EDA on the most common words/sentiments for each song.
 5. Finally, I try to evaluate whether there is a correlation between most common words and song sentiment with its popularity. 
 
-Lyric Clustering Processing (Stretch Goal)
-6. First (for Lyrics), I use Word2Vec/Spacey to cluster the lyrics on certain words. 
-7. Finally, I try to evaluate whether there is a correlation between most common words and artist sentiment with their tweet popularity (positive tweets).
+Lyric Clustering Processing (Completed Stretch Goal)
+6. First (for Lyrics), I use Spacey to convert the lyrics of the 300 most common words in each song of ordered_playlist into vectors. These word vectors are arranged by their similarity to one another on a large coordinate plane. 
+7. Finally, I try to evaluate whether there is a correlation between a group of lyrics' content and their artist's stream-popularity. I conclude that yes, there IS a clear relationship between a song's stream-popularity and lyrical content. Though, for further research, I would like to pursue Hypothesis Testing to be certain of this relationship being a correlation at a statistically significant level.
 
 # Project 5: Estimating Flood Depths of Submerged Vehicles with Convolutional Neural Networks (cNN)
 
@@ -47,7 +66,7 @@ As a result of these factors, we need to be able to use Visual APIs, Machine Lea
 - We assigned Flood Height to these images.
 - Finally, we inputted our processed flooded vehicles through our Convolutional Neural Network, successfully estimating flood height with visual images.
 
-# Project 4: Hackathon
+# Project 4: Predicting Income Bracket of Citizens with their Demographic Backgrounds
 
 ### Problem Statement
 In this project we seek to identify individuals who have an income above 50,000 dollars per year using information about their education, family, age, occupation and nationality. We will use a limited dataset to train classification models and determine the best predictors and models.

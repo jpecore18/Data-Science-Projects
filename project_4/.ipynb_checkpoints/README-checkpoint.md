@@ -1,3 +1,5 @@
+# Project 4: Predicting Income Bracket of Citizens with their Demographic Backgrounds
+
 # Problem Statement
 ​
 In this project we seek to identify individuals who have an income above $50,000 per year using information about their education, family, age, occupation and nationality. We will use a limited dataset to train classification models and determine the best predictors and models.
